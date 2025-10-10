@@ -6,10 +6,8 @@ c_stdlib:
 - sysroot
 c_stdlib_version:
 - '2.17'
-cdt_name:
-- conda
 channel_sources:
-- conda-forge,conda-forge/label/python_rc
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -23,7 +21,7 @@ fftw:
 hdf5:
 - 1.14.6
 imath:
-- 3.2.1
+- 3.2.2
 libboost_devel:
 - '1.88'
 libboost_python_devel:
@@ -57,7 +55,5 @@ vigra:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - python
-  - channel_sources
 zlib:
 - '1'
