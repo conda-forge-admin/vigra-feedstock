@@ -1,4 +1,4 @@
-From f2755c90551b4af0ed2ed517ef64abcffd91b3c1 Mon Sep 17 00:00:00 2001
+From 4435b33e1d02942deb41626c1d8b762238fbf22b Mon Sep 17 00:00:00 2001
 From: Mark Harfouche <mark.harfouche@gmail.com>
 Date: Tue, 23 Dec 2025 07:55:12 -0500
 Subject: [PATCH] Conditionally remove numpy's ptp methods if numpy 2.4 or
@@ -33,7 +33,7 @@ index ca5c5f491..b75ab610a 100644
  
  <ul>
 diff --git a/vigranumpy/lib/arraytypes.py b/vigranumpy/lib/arraytypes.py
-index 52b2623ed..d9e24f4bc 100644
+index 52b2623ed..fde0b27bc 100644
 --- a/vigranumpy/lib/arraytypes.py
 +++ b/vigranumpy/lib/arraytypes.py
 @@ -37,6 +37,7 @@
@@ -48,7 +48,7 @@ index 52b2623ed..d9e24f4bc 100644
  
  from collections.abc import Iterable
  
-+numpyHasPtp = np.__version__.startswith(("1.", "2.0.", "2.1.", "2.2.", "2.3."))
++numpyHasPtp = numpy.__version__.startswith(("1.", "2.0.", "2.1.", "2.2.", "2.3."))
  
  def _preserve_doc(f):
      npy_doc = eval('numpy.ndarray.%s.__doc__' % f.__name__)
@@ -121,14 +121,14 @@ index 4f8986858..c1f81ace8 100644
      def ravel(self, order='C'):
          res = np.ndarray.ravel(self, order)
 diff --git a/vigranumpy/lib/tagged_array.py b/vigranumpy/lib/tagged_array.py
-index efc63ca13..0b4117139 100644
+index efc63ca13..4e865d965 100644
 --- a/vigranumpy/lib/tagged_array.py
 +++ b/vigranumpy/lib/tagged_array.py
 @@ -36,6 +36,8 @@
  import copy, sys
  import numpy
  
-+numpyHasPtp = np.__version__.startswith(("1.", "2.0.", "2.1.", "2.2.", "2.3."))
++numpyHasPtp = numpy.__version__.startswith(("1.", "2.0.", "2.1.", "2.2.", "2.3."))
 +
  
  def preserve_doc(f):
@@ -156,7 +156,7 @@ index efc63ca13..0b4117139 100644
      @preserve_doc
      def ravel(self, order='C'):
 diff --git a/vigranumpy/test/test_arraytypes.py b/vigranumpy/test/test_arraytypes.py
-index 7111196ef..6f7b5c58f 100644
+index 7111196ef..2166aa534 100644
 --- a/vigranumpy/test/test_arraytypes.py
 +++ b/vigranumpy/test/test_arraytypes.py
 @@ -51,7 +51,7 @@
@@ -164,7 +164,7 @@ index 7111196ef..6f7b5c58f 100644
  
  
 -numpyHasComplexNegateBug = numpy.version.version.startswith('1.0')
-+numpyHasPtp = np.__version__.startswith(("1.", "2.0.", "2.1.", "2.2.", "2.3."))
++numpyHasPtp = numpy.__version__.startswith(("1.", "2.0.", "2.1.", "2.2.", "2.3."))
  
  try:
      vt.testAny()
